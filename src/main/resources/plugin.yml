@@ -1,0 +1,37 @@
+name: Verifity-Plugin
+description: 'An email whitelist plugin'
+version: '${version}'
+main: online.slidecraft.verifityplugin.VerifityPlugin
+paper-plugin-loader: online.slidecraft.verifityplugin.VerifityPluginLoader
+api-version: '26.3'
+author: KayOhTic
+load: POSTWORLD
+
+permissions:
+  verifityplugin.verify:
+    description: 'Allows the player to use /verify to verify their email'
+    default: true
+  verifityplugin.admin.status:
+    description: 'Allows checking the verification status of a player'
+    default: op
+  verifityplugin.admin.bypass:
+    description: 'Bypasses verification for a player'
+    default: op
+  verifityplugin.admin.revoke:
+    description: 'Allows un-verifying a player'
+    default: op
+  verifityplugin.admin.*:
+    description: 'Grants verification status, bypass, and revoke permissions'
+    default: op
+    children:
+      verifityplugin.admin.status: true
+      verifityplugin.admin.bypass: true
+      verifityplugin.admin.revoke: true
+
+commands:
+  verify:
+    description: 'Verify account via TAMU email'
+    usage: '\verify <email> | /verify status <player> | /verify bypass | /verify bypass <player> | /verify revoke <player>'
+    permission: verifityplugin.verify
+    aliases: [auth, verify]
+    permission-message: 'You do not have permission to use this command!'
